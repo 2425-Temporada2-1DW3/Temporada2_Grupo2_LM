@@ -1,4 +1,0 @@
-example.txt
-git add
-git commit 
-git push request
