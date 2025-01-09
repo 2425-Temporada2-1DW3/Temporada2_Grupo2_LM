@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"> <!-- Establece el conjunto de caracteres a UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura la vista para que sea responsive -->
+    <link rel="stylesheet" href="../CSS/index.css"> <!-- Enlace a la hoja de estilos para la página -->
+    <link rel="shortcut icon" href="/images/LogoTxurdiLigaTransparente.png" type="image/x-icon"> <!-- Enlace al favicon del sitio -->
+    <title>Reto</title> <!-- Título de la página -->
+</head>
+<body>
+    
+    <header>
+        <div class="logo">
+            <a href="../HTML/homepage.html">
+                <img src="/images/TxurdiligaLogo.png" alt="logo"> <!-- Logo del sitio con enlace a la página principal -->
+            </a>
+        </div>
+
+        <nav class="menu">
+            <a href="#" class="menu-link" data-url="homepage.html">Homepage</a>
+            <a href="#" class="menu-link" data-url="temporadas.html">Temporadas</a>
+            <a href="#" class="menu-link" data-url="equipos.html">Equipos</a>
+            <a href="#" class="menu-link" data-url="noticias.html">Noticias</a>
+            <a href="#" class="menu-link" data-url="contacto.html">Contacto</a>
+        </nav>
+    </header>
+
+
+<main>
+    <section id="content">
+        <!-- El contenido cargado por AJAX aparecerá aquí -->
+    </section>
+
+    <aside>
+        <a href="https://www.bet365.com/" class="imagen" img src="../Imagenes/Aside provisional.jpg" alt="Publicidad"></a> <!-- Enlace publicitario a Bet365 -->
+    </aside>
+
+</main>
+
+
+
+
+
+
+    <footer>
+        <p>© 2025 Mi Sitio Web</p>
+    </footer>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.menu-link').on('click', function(event) {
+                event.preventDefault();
+                var url = $(this).data('url');
+                $('#content').load(url);
+            });
+        });
+    </script>
+</body>
+</html>

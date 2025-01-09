@@ -1,0 +1,131 @@
+
+
+/*Inicio de header logo y titulo*/
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #8892c6;
+    }
+
+/*Inicio de header logo y titulo*/
+
+header {
+    display: flex; /* Utiliza flexbox para el diseño del header */
+    align-items: center; /* Alinea los elementos del header verticalmente al centro */
+    justify-content: space-between; /* Distribuye los elementos del header con espacio entre ellos */
+    position: fixed; /* Fija el header en la parte superior de la página */
+    top: 0; /* Posiciona el header en la parte superior */
+    width: 100%; /* Establece el ancho del header al 100% del contenedor */
+    background-color: rgb(51, 178, 255); /* Establece el color de fondo del header */
+    opacity: 1; /* Establece la opacidad del header */
+    z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
+} 
+
+.logo {
+    display: flex; /* Utiliza flexbox para el diseño del logo */
+    align-items: center; /* Alinea los elementos del logo verticalmente al centro */
+}
+
+.logo img {
+    width: 50%; /* Establece el ancho de la imagen del logo al 50% del contenedor */
+    margin-right: 25%; /* Establece un margen derecho del 25% para la imagen del logo */
+    display: block; /* Establece la imagen del logo como un bloque */
+}
+
+
+/* NAV */
+
+.menu {
+    display: flex; /* Utiliza flexbox para el diseño del menú */
+    justify-content: space-around; /* Distribuye los elementos del menú con espacio entre ellos */
+    align-items: center; /* Alinea los elementos del menú verticalmente al centro */
+    padding: 0,5%; /* Establece un padding vertical de 10px para el menú */
+    width: 100%; /* Establece el ancho del menú al 100% del contenedor */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho y alto del menú */
+}
+
+.menu a {
+    padding: 10px 20px; /* Establece un padding de 10px vertical y 20px horizontal para los enlaces del menú */
+    text-decoration: none; /* Elimina la decoración del texto de los enlaces del menú */
+    color: white; /* Establece el color del texto de los enlaces del menú a blanco */
+    font-size: 150%; /* Establece el tamaño de la fuente de los enlaces del menú */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9); /* Establece una sombra para el texto de los enlaces del menú */
+    font-family: Cambria, Georgia, serif; font-size: 24px;; /* Establece la fuente de los enlaces del menú */
+    transition: background-color 0.3s, color 0.3s; /* Establece una transición para el color de fondo y el color del texto de los enlaces del menú */
+}
+
+.menu a:hover {
+    color: #ffbf00; /* Establece el color del texto de los enlaces del menú al pasar el ratón */
+    background-color: rgb(51, 178, 255); /* Establece el color de fondo de los enlaces del menú al pasar el ratón */
+}
+
+
+
+
+
+/***************Section y main***************/
+
+main {
+    grid-template-columns: 3fr 1fr; /* Define una cuadrícula con dos columnas, la primera tres veces más ancha que la segunda */
+}
+
+section {
+    padding-top: 3%;
+    padding-left: 1%;
+    background-color: #8892c6;
+}
+
+
+
+
+
+
+/*Aside*/
+
+aside {
+    position: fixed; /* Fija el aside en la pantalla */
+    right: 0; /* Posiciona el aside a la derecha */
+    top: 4%; /* Posiciona el aside en la parte superior */
+    height: 70%; /* Establece la altura del aside al 100% de la pantalla */
+    width: 20%; /* Establece el ancho del aside al 20% del contenedor */
+    background-color: #f0f0f0; /* Color de fondo para el aside */
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1); /* Añade una sombra para darle un poco de profundidad */
+    overflow-y: auto; /* Permite el desplazamiento vertical si el contenido es demasiado grande */
+}
+
+.imagen {
+    width: 100%; /* Ancho de la imagen relativo al contenedor */
+    height: auto; /* La altura se ajustará automáticamente para mantener la proporción */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    aside {
+        width: 100%; /* En pantallas pequeñas, el aside ocupará todo el ancho */
+        height: auto; /* La altura se ajustará automáticamente */
+        position: relative; /* Cambia la posición a relativa para que no se superponga al contenido */
+    }
+}
+
+
+
+
+/***************FOOTER FINAL***************/
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(51, 178, 255); /* Establece el color de fondo del footer */
+    color: white;
+    text-align: center;
+    padding: 1em;
+}
+
+
+
