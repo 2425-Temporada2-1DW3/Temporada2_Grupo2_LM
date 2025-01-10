@@ -85,17 +85,75 @@ section {
 
 
 
+
+
+
+
+/***************Homepage***************/
+
+.streaming {
+    display: flex; /* Utiliza flexbox para el diseño del cuadro */
+    flex-direction: column; /* Alinea el contenido en columna */
+    align-items: center; /* Alinea el contenido al inicio (izquierda) */
+    justify-content: flex-start; /* Alinea el contenido verticalmente al inicio (arriba) */
+
+}
+
+.streaming img {
+    width: 40%; /* La imagen ocupa el 100% del ancho del cuadro */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin-bottom: 10px; /* Establece un margen inferior de 10px para la imagen */
+}
+
+.streaming h1 {
+    text-align: center; /* Alinea el texto a la izquierda */
+    color: whitesmoke; /* Establece el color del texto */
+    text-shadow: rgb(105, 118, 119);
+    font-size: 2em;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-bottom: 0%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*Aside*/
 
 aside {
     position: fixed; /* Fija el aside en la pantalla */
-    right: 0; /* Posiciona el aside a la derecha */
-    top: 4%; /* Posiciona el aside en la parte superior */
-    height: 70%; /* Establece la altura del aside al 100% de la pantalla */
+    right: 1%; /* Posiciona el aside a la derecha */
+    top: 8.5%; /* Posiciona el aside en la parte superior */
+    height: 100%; /* Establece la altura del aside al 100% de la pantalla */
     width: 20%; /* Establece el ancho del aside al 20% del contenedor */
     background-color: #f0f0f0; /* Color de fondo para el aside */
     box-shadow: -2px 0 5px rgba(0,0,0,0.1); /* Añade una sombra para darle un poco de profundidad */
     overflow-y: auto; /* Permite el desplazamiento vertical si el contenido es demasiado grande */
+
 }
 
 .imagen {
