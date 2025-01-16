@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Contacto</title>
+    <script>
+        function enviarFormulario() {
+            var email = document.getElementById("email").value;
+            var mensaje = document.getElementById("mensaje").value;
+
+            if (email && mensaje) {
+                alert("Su mensaje se ha enviado exitosamente.");
+                document.getElementById("formularioContacto").reset();
+            } else {
+                alert("Por favor, complete todos los campos.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Formulario de Contacto</h1>
+    <form id="formularioContacto" onsubmit="event.preventDefault(); enviarFormulario();">
+        <label for="email">Gmail:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <label for="mensaje">Reclamación (máximo 200 caracteres):</label><br>
+        <textarea id="mensaje" name="mensaje" maxlength="200" required></textarea><br><br>
+        
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
+
+
