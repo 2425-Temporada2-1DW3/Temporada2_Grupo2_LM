@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Clasificación</title>
+    
 </head>
 <body>
     <h1>Clasificación de Equipos</h1>
-    <table id="clasificacion">
-        <tr>
-            <th>Posición</th>
-            <th>Equipo</th>
-            <th>Puntos</th>
-        </tr>
-    </table>
+    <div id="tabla"></div>
 
     <script>
         function loadXMLDoc(filename) {
@@ -21,24 +15,25 @@
             return xhttp.responseXML;
         }
 
-        function displayTable(xml) {
-            var table = document.getElementById("clasificacion");
-            var equipos = xml.getElementsByTagName("equipo");
+        function displayTable() {
+            var xml = loadXMLDoc("clasificacion.xml");
+            var xsl = loadXMLDoc("clasificacion.xsl");
 
-            for (var i = 0; i < equipos.length; i++) {
-                var row = table.insertRow();
-                var posicion = row.insertCell(0);
-                var nombre = row.insertCell(1);
-                var puntos = row.insertCell(2);
-
-                posicion.innerHTML = equipos[i].getElementsByTagName("posicion")[0].childNodes[0].nodeValue;
-                nombre.innerHTML = equipos[i].getElementsByTagName("nombre")[0].childNodes[0].nodeValue;
-                puntos.innerHTML = equipos[i].getElementsByTagName("puntos")[0].childNodes[0].nodeValue;
+            // Código para transformar XML usando XSL
+            if (window.ActiveXObject || "ActiveXObject" in window) {
+                // Para IE
+                var ex = xml.transformNode(xsl);
+                document.getElementById("tabla").innerHTML = ex;
+            } else if (document.implementation && document.implementation.createDocument) {
+                // Para otros navegadores
+                var xsltProcessor = new XSLTProcessor();
+                xsltProcessor.importStylesheet(xsl);
+                var resultDocument = xsltProcessor.transformToFragment(xml, document);
+                document.getElementById("tabla").appendChild(resultDocument);
             }
         }
 
-        var xml = loadXMLDoc("clasificacion.xml");
-        displayTable(xml);
+        displayTable();
     </script>
 </body>
 </html>
