@@ -1,1 +1,44 @@
-<h1>Ajax</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clasificación</title>
+</head>
+<body>
+    <h1>Clasificación de Equipos</h1>
+    <table id="clasificacion">
+        <tr>
+            <th>Posición</th>
+            <th>Equipo</th>
+            <th>Puntos</th>
+        </tr>
+    </table>
+
+    <script>
+        function loadXMLDoc(filename) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", filename, false);
+            xhttp.send();
+            return xhttp.responseXML;
+        }
+
+        function displayTable(xml) {
+            var table = document.getElementById("clasificacion");
+            var equipos = xml.getElementsByTagName("equipo");
+
+            for (var i = 0; i < equipos.length; i++) {
+                var row = table.insertRow();
+                var posicion = row.insertCell(0);
+                var nombre = row.insertCell(1);
+                var puntos = row.insertCell(2);
+
+                posicion.innerHTML = equipos[i].getElementsByTagName("posicion")[0].childNodes[0].nodeValue;
+                nombre.innerHTML = equipos[i].getElementsByTagName("nombre")[0].childNodes[0].nodeValue;
+                puntos.innerHTML = equipos[i].getElementsByTagName("puntos")[0].childNodes[0].nodeValue;
+            }
+        }
+
+        var xml = loadXMLDoc("clasificacion.xml");
+        displayTable(xml);
+    </script>
+</body>
+</html>
