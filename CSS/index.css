@@ -29,6 +29,7 @@ header {
 .logo {
     display: flex; /* Utiliza flexbox para el diseño del logo */
     align-items: center; /* Alinea los elementos del logo verticalmente al centro */
+    width: 8%;
 }
 
 .logo img {
