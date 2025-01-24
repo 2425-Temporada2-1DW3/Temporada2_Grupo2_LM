@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Filtrar Temporadas</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        select {
+            display: block;
+            margin: 0 auto 20px auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .team-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .team-box {
+            width: 45%;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+            border-radius: 8px;
+        }
+        .team-box:hover {
+            transform: scale(1.05);
+        }
+        .team-box strong {
+            font-size: 1.2em;
+            color: #333;
+        }
+        .team-box small {
+            display: block;
+            margin-top: 5px;
+            color: #666;
+        }
+        .players-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .players-table th, .players-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .players-table th {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+        .players-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Selecciona una Temporada</h1>
+    <select id="seasonSelect" onchange="filterTeams()">
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+    </select>
+    <div id="result"></div>
+
+    <script>
+        let currentTeamIndex = null;
+
+        function filterTeams(season = null) {
+            if (!season) {
+                season = document.getElementById('seasonSelect').value;
+            } else {
+                document.getElementById('seasonSelect').value = season;
+            }
+            const resultDiv = document.getElementById('result');
+            currentTeamIndex = null;
+
+            fetch('equipos.xml')
+                .then(response => {
+                    console.log('XML file fetched successfully');
+                    return response.text();
+                })
+                .then(data => {
+                    console.log('XML data:', data);
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(data, 'application/xml');
+                    const teams = xmlDoc.getElementsByTagName('team');
+                    let result = `<div class="team-container">`;
+
+                    for (let i = 0; i < teams.length; i++) {
+                        if (teams[i].getAttribute('season') === season) {
+                            const teamName = teams[i].getAttribute('name');
+                            const foundedYear = teams[i].getAttribute('founded');
+                            result += `
+                                <div class="team-box" onclick="togglePlayers(${i}, '${season}')">
+                                    <strong>${teamName}</strong><br>
+                                    <small>Fundado en ${foundedYear}</small>
+                                </div>`;
+                        }
+                    }
+
+                    result += '</div>';
+                    resultDiv.innerHTML = result;
+                })
+                .catch(error => console.error('Error al cargar el archivo XML:', error));
+        }
+
+        function togglePlayers(teamIndex, season) {
+            const resultDiv = document.getElementById('result');
+
+            if (currentTeamIndex === teamIndex) {
+                filterTeams(season);
+            } else {
+                currentTeamIndex = teamIndex;
+
+                fetch('equipos.xml')
+                    .then(response => response.text())
+                    .then(data => {
+                        const parser = new DOMParser();
+                        const xmlDoc = parser.parseFromString(data, 'application/xml');
+                        const team = xmlDoc.getElementsByTagName('team')[teamIndex];
+                        const players = team.getElementsByTagName('player');
+                        let playersTable = `
+                            <table class="players-table">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Fecha de Nacimiento</th>
+                                    <th>Dorsal</th>
+                                </tr>`;
+                        for (let j = 0; j < players.length; j++) {
+                            const firstName = players[j].getElementsByTagName('firstName')[0].textContent;
+                            const lastName = players[j].getElementsByTagName('lastName')[0].textContent;
+                            const secondLastName = players[j].getElementsByTagName('secondLastName')[0].textContent;
+                            const birthDate = players[j].getElementsByTagName('birthDate')[0].textContent;
+                            const dorsal = players[j].getElementsByTagName('dorsal')[0].textContent;
+                            playersTable += `
+                                <tr>
+                                    <td>${firstName} ${lastName} ${secondLastName}</td>
+                                    <td>${birthDate}</td>
+                                    <td>${dorsal}</td>
+                                </tr>`;
+                        }
+                        playersTable += '</table>';
+
+                        resultDiv.innerHTML = `
+                            <div class="team-container">
+                                <div class="team-box" onclick="togglePlayers(${teamIndex}, '${season}')">
+                                    <strong>${team.getAttribute('name')}</strong><br>
+                                    <small>Fundado en ${team.getAttribute('founded')}</small>
+                                </div>
+                            </div>
+                            <div class="players-list">
+                                ${playersTable}
+                            </div>`;
+                    })
+                    .catch(error => console.error('Error al cargar el archivo XML:', error));
+            }
+        }
+
+        // Obtener la temporada más alta y llamarla al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            const seasonSelect = document.getElementById('seasonSelect');
+            const highestSeason = seasonSelect.options[0].value;
+            filterTeams(highestSeason);
+        });
+    </script>
+</body>
+</html>
