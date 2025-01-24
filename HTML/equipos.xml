@@ -1,35 +1,3 @@
-<<<<<<< Updated upstream
-<?xml version="1.0" encoding="UTF-8"?>
-<teams>
-    <team>
-        <name>Equipo 1</name>
-        <foundationDate>1901</foundationDate>
-    </team>
-    <team>
-        <name>Equipo 2</name>
-        <foundationDate>1902</foundationDate>
-    </team>
-        <team>
-        <name>Equipo 3</name>
-        <foundationDate>1903</foundationDate>
-    </team>
-        <team>
-        <name>Equipo 4</name>
-        <foundationDate>1904</foundationDate>
-    </team>
-        <team>
-        <name>Equipo 5</name>
-        <foundationDate>1905</foundationDate>
-    </team>
-        <team>
-        <name>Equipo 6</name>
-        <foundationDate>1906</foundationDate>
-    </team>
-
-    <!-- Añade más equipos según sea necesario -->
-</teams>
-
-=======
 <teams>
     <team season="2021" name="A" founded="1901">
         <player>
@@ -698,4 +666,3 @@
         </player>
     </team>
 </teams>
->>>>>>> Stashed changes
