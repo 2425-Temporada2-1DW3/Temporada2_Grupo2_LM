@@ -96,6 +96,6 @@
                 </xsl:for-each>
             </div>
         </body>
-        </html>
+      </html>
     </xsl:template>
 </xsl:stylesheet>
