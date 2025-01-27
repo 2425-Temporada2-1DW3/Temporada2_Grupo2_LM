@@ -73,7 +73,7 @@
     <script>
         let currentTeamIndex = null;
 
-        function filterTeams(season = null) {
+        window.filterTeams = function(season = null) {
             if (!season) {
                 season = document.getElementById('seasonSelect').value;
             } else {

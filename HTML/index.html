@@ -1,61 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8"> <!-- Establece el conjunto de caracteres a UTF-8 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura la vista para que sea responsive -->
-    <link rel="stylesheet" href="../CSS/index.css"> <!-- Enlace a la hoja de estilos para la página -->
-    <link rel="shortcut icon" href="../Imagenes/Favicon.jpg" type="image/x-icon"> <!-- Enlace al favicon del sitio -->
-    <title>Reto</title> <!-- Título de la página -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/index.css">
+    <link rel="shortcut icon" href="../Imagenes/Favicon.jpg" type="image/x-icon">
+    <title>Reto</title>
 </head>
 <body>
     
     <header>
         <div class="logo">
             <a href="#" class="menu-link" data-url="homepage.html">
-                <img src="../imagenes/Logo.jpg" alt="logo"> <!-- Logo del sitio con enlace a la página principal -->
+                <img src="../imagenes/Logo.jpg" alt="logo">
             </a>
         </div>
 
         <nav class="menu">
             <a href="#" class="menu-link" data-url="homepage.html">Homepage</a>
             <a href="#" class="menu-link dropbtn" data-url="temporadas.html">Temporadas</a>
-            <a href="#" class="menu-link" data-url="equipos.html">Equipos</a>
+            <a href="#" id="equipos-link" class="menu-link" data-url="equipos.html">Equipos</a>
             <a href="#" class="menu-link" data-url="contacto.html">Contacto</a>
         </nav>
     </header>
 
+    <main>
+        <section id="content">
+            <!-- El contenido cargado por AJAX aparecerá aquí -->
+        </section>
 
-<main>
-    <section id="content">
-        <!-- El contenido cargado por AJAX aparecerá aquí -->
-    </section>
-
-    <aside>
-        <a href="https://www.bet365.com/" class="imagen" img src="../Imagenes/Aside provisional.jpg" alt="Publicidad"></a> <!-- Enlace publicitario a Bet365 -->
-    </aside>
-
-</main>
-
-
-
-
-
+        <aside>
+            <a href="https://extra.bet365.es/promotions/es/open-account-offer" class="imagen">
+                <img src="../Imagenes/Aside.png" alt="Publicidad">
+            </a>
+        </aside>
+    </main>
 
     <footer>
         <p>© 2025 Mi Sitio Web</p>
     </footer>
 
-
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-             // Cargar el contenido HTML por defecto mediante AJAX
-             $("#main-content").load("homepage.html");
+            // Cargar el contenido HTML por defecto mediante AJAX
+            $("#content").load("homepage.html");
+
             $('.menu-link').on('click', function(event) {
                 event.preventDefault();
                 var url = $(this).data('url');
                 $('#content').load(url);
+            });
+
+            // Detectar clic en el enlace de equipos
+            $('#equipos-link').on('click', function(event) {
+                event.preventDefault();
+                var url = $(this).data('url');
+                $('#content').load(url, function() {
+                    // Obtener la temporada más alta y cargar los equipos
+                    const seasonSelect = document.getElementById('seasonSelect');
+                    const highestSeason = seasonSelect.options[0].value;
+                    filterTeams(highestSeason);
+                });
             });
         });
     </script>

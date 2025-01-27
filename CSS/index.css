@@ -372,16 +372,13 @@ aside {
     right: 1%; /* Posiciona el aside a la derecha */
     top: 8.5%; /* Posiciona el aside en la parte superior */
     height: 100%; /* Establece la altura del aside al 100% de la pantalla */
-    width: 20%; /* Establece el ancho del aside al 20% del contenedor */
-    background-color: #f0f0f0; /* Color de fondo para el aside */
+    width: 22%; /* Establece el ancho del aside al 20% del contenedor */
     box-shadow: -2px 0 5px rgba(0,0,0,0.1); /* Añade una sombra para darle un poco de profundidad */
-    overflow-y: auto; /* Permite el desplazamiento vertical si el contenido es demasiado grande */
-
 }
 
-.imagen {
-    width: 100%; /* Ancho de la imagen relativo al contenedor */
-    height: auto; /* La altura se ajustará automáticamente para mantener la proporción */
+aside img {
+    width: 100%;
+    height: auto; /* Mantiene la proporción de la imagen */
 }
 
 /* Ajustes para pantallas pequeñas */
