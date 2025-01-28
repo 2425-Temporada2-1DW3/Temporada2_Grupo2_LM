@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    
+    <title>Clasificación de Equipos</title>
+    <link rel="stylesheet" type="text/css" href="index.css"/>
 </head>
 <body>
+
     <h1>Clasificación de Equipos</h1>
+    <label for="temporada">Selecciona la temporada:</label>
+    <select id="temporada" onchange="displayTable()">
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+    </select>
+
     <div id="tabla"></div>
 
     <script>
@@ -16,21 +25,28 @@
         }
 
         function displayTable() {
+            var temporada = document.getElementById("temporada").value;
             var xml = loadXMLDoc("clasificacion.xml");
-            var xsl = loadXMLDoc("clasificacion.xsl");
 
-            // Código para transformar XML usando XSL
-            if (window.ActiveXObject || "ActiveXObject" in window) {
-                // Para IE
-                var ex = xml.transformNode(xsl);
-                document.getElementById("tabla").innerHTML = ex;
-            } else if (document.implementation && document.implementation.createDocument) {
-                // Para otros navegadores
-                var xsltProcessor = new XSLTProcessor();
-                xsltProcessor.importStylesheet(xsl);
-                var resultDocument = xsltProcessor.transformToFragment(xml, document);
-                document.getElementById("tabla").appendChild(resultDocument);
+            var equipos = xml.getElementsByTagName("equipo");
+            var tabla = "<table><tr><th>Posición</th><th>Equipo</th><th>Puntos</th><th>Goles a favor</th><th>Goles en contra</th><th>Diferencia de goles</th></tr>";
+
+            for (var i = 0; i < equipos.length; i++) {
+                var temporadaNombre = equipos[i].parentNode.getElementsByTagName("nombre")[0].childNodes[0].nodeValue;
+                if (temporadaNombre === temporada) {
+                    tabla += "<tr>";
+                    tabla += "<td>" + equipos[i].getElementsByTagName("ranking")[0].childNodes[0].nodeValue + "</td>";
+                    tabla += "<td>" + equipos[i].getElementsByTagName("nombre")[0].childNodes[0].nodeValue + "</td>";
+                    tabla += "<td>" + equipos[i].getElementsByTagName("puntos")[0].childNodes[0].nodeValue + "</td>";
+                    tabla += "<td>" + equipos[i].getElementsByTagName("golesFavor")[0].childNodes[0].nodeValue + "</td>";
+                    tabla += "<td>" + equipos[i].getElementsByTagName("golesContra")[0].childNodes[0].nodeValue + "</td>";
+                    tabla += "<td>" + equipos[i].getElementsByTagName("diferenciaGoles")[0].childNodes[0].nodeValue + "</td>";
+                    tabla += "</tr>";
+                }
             }
+
+            tabla += "</table>";
+            document.getElementById("tabla").innerHTML = tabla;
         }
 
         displayTable();
