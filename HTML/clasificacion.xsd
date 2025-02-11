@@ -1,0 +1,27 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="liga">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="temporada" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="nombre" type="xs:string"/>
+                            <xs:element name="equipo" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="ranking" type="xs:int"/>
+                                        <xs:element name="nombre" type="xs:string"/>
+                                        <xs:element name="puntos" type="xs:int"/>
+                                        <xs:element name="golesFavor" type="xs:int"/>
+                                        <xs:element name="golesContra" type="xs:int"/>
+                                        <xs:element name="diferenciaGoles" type="xs:int"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
